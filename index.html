@@ -314,8 +314,8 @@ You cannot reply to this conversation
 </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="jquery.nicescroll.min.js">
-    </script>
+<script src="jquery.nicescroll.min.js"></script>
+<script src="name.js"></script>
 <script>
 var rose_typing = '<div id="rose_typing" class="message__item message__item--bot container-typing"><span class="message message--bot"><span class="circle cc1" id="circle1"></span><span class="circle cc2" id="circle2"></span><span class="circle cc3" id="circle3"></span></span></div>';
 var count = 0;
@@ -525,34 +525,7 @@ async function think_reply(repl) {
             }
             count += 1;
         } else if (count == 1) {
-            repl = repl.replace("'", "");
-            // console.log(repl);
-            var omit = ["hi ", "hey ", "my ", "name ", " name", "is ", "its ", 'i ', 'am ', 'im'];
-            for (i in omit) {
-                repl = repl.replace(omit[i], "");
-            }
-            repl = repl.replace("  ", " ");
-            
-            var names_list = ["jonno", "jono", "jonathan", "johnny", "john",
-                "vincent", "therese", "karen", "maggie", "shannon", "david",
-                "kim", "lisa", "jisoo", "jennie", "jenny", "rose",
-                "amanda", "thy", "duy", "amy", "kevin", "celeste", "hannah",
-                "ellen", "sophie", "lily", "charlene", "sharon",
-                "victor", "alex", "jack", "jessica", "jessi", "jess", "vinnie", "neha", "soph",
-                "hung", "jamie", "anthony", "dylan", "anton", "andrew", "alina",
-                "eric", "helen", "james", "jasmine", "jason", "patrick",
-                "victor", "rachel", "sally", "chelsea", "euginia", "eug", "sharon", "shaz", "marie",
-                "peter"];
-             
-            if (repl.includes(" ")) {
-                for (temp_name in names_list) {
-                    if (repl.toLowerCase().includes(names_list[temp_name]))
-                        name = names_list[temp_name];
-                }
-                if (name == "") name = "there";
-            } else {
-                name = repl;
-            }
+            name = getName(repl);
             
             if (name == "rose") {
                 delayedSend([
