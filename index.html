@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<title>Messenger - Roseanne Park</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<style>
+html {
+  overflow: hidden;
+
+}
+
+body {
+    overflow: hidden ! important;
+    height: 100%;
+}
+
+.container {
+  height: 100%;
+  margin: 0 auto;
+  padding-bottom: 45px;
+}
+
+.form-rounded {
+  border-radius: 20rem;
+  padding: 8px 15px;
+  margin-top: 2px;
+  width: 100%;
+  background-color: #eee;
+  border: 0 none;
+}
+
+.form-rounded:focus {
+    outline: none;
+    background-color: #eee;
+}
+
+.screen {
+  padding-top: 10px;
+}
+
+.user-input {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.message__list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  width: 100%;
+  position: relative;
+}
+.message__list:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.message__item {
+  max-width:70%;
+  clear: both;
+}
+
+.message__item--bot {
+  float: left;
+}
+.message__item--bot:first-of-type .message {
+  border-top-left-radius: 20px;
+}
+.message__item--bot:last-of-type .message {
+  border-bottom-left-radius: 20px;
+}
+
+.message__item--user {
+  float: right;
+  text-align: right;
+}
+.message__item--user:first-of-type .message {
+  border-top-right-radius: 20px;
+}
+.message__item--user:last-of-type .message {
+  border-bottom-right-radius: 20px;
+}
+
+.message {
+  padding: 8px 15px;
+  margin-top: 2px;
+  display: inline-block;
+  text-align: left;
+}
+
+.message--bot {
+  background-color: #eee;
+  border-radius: 3px 20px 20px 3px;
+  margin-left: 35px;
+}
+
+.message--user {
+  background-color: #0baaff;
+  color: #fff;
+  border-radius: 20px 3px 3px 20px;
+}
+
+.bot__image {
+  width: 28px;
+  height: 28px;
+  position: absolute;
+  bottom: 3px;
+  left: 0;
+  border-radius: 20px;
+}
+
+.answer {
+  position: fixed;
+  bottom: 0;
+  background-color: #fff;
+  width: 100%;
+  padding: 10px;
+}
+
+.answer__button {
+  background-color: #0baaff;
+  border-radius: 20px;
+  color: #fff;
+  padding: 8px 15px;
+  margin-top: 2px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+
+
+.list-phone .meta-bar,
+.list-text .meta-bar,
+.list-account .meta-bar,
+.list-chat .meta-bar {
+  border-bottom: 1px solid #7daefe;
+  padding: 0 0 0 25px;
+  height: 40px;
+  position: relative;
+  width: 100%;
+  background-color: white;
+}
+.list-phone .meta-bar.chat,
+.list-text .meta-bar.chat,
+.list-account .meta-bar.chat,
+.list-chat .meta-bar.chat {
+  border-top: 1px solid lightgrey;
+  background: white;
+  border-bottom: none;
+  position: absolute;
+  bottom: 0px; /*was 50 when had the bottom menu*/
+}
+
+.container-typing {
+    width: 200px;
+    position: relative;
+    margin: 0 auto
+}
+
+.circle {
+    height: 8px;
+    width: 8px;
+    margin: 0 3px;
+    background-color: #B6B5BA;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    top: 0px;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear
+
+}
+
+#circle1 {
+  -webkit-animation-name: circle1;
+}
+
+#circle2 {
+  -webkit-animation-name: circle2;
+}
+
+#circle3 {
+  -webkit-animation-name: circle3;
+}
+
+#circle1 {
+  animation-name: circle1;
+}
+
+#circle2 {
+  animation-name: circle2;
+}
+
+#circle3 {
+  animation-name: circle3;
+}
+
+@-webkit-keyframes circle1 {
+  0% {
+    top: 0px;
+  }
+  15% {
+    top: -10px;
+  }
+  25% {
+    top: 0px;
+  }
+}
+
+@-webkit-keyframes circle2 {
+  10% {
+    top: 0px;
+  }
+  25% {
+    top: -10px;
+  }
+  35% {
+    top: 0px;
+  }
+}
+
+@-webkit-keyframes circle3 {
+  15% {
+    top: 0px;
+  }
+  30% {
+    top: -10px;
+  }
+  40% {
+    top: 0px;
+  }
+}
+
+@keyframes circle1 {
+  0% {
+    top: 0px;
+  }
+  20% {
+    top: -10px;
+  }
+  30% {
+    top: 0px;
+  }
+}
+
+@keyframes circle2 {
+  10% {
+    top: 0px;
+  }
+  25% {
+    top: -10px;
+  }
+  35% {
+    top: 0px;
+  }
+}
+
+@keyframes circle3 {
+  15% {
+    top: 0px;
+  }
+  30% {
+    top: -10px;
+  }
+  40% {
+    top: 0px;
+  }
+}
+
+</style>
+<script>
+  window.console = window.console || function(t) {};
+</script>
+<script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+</head>
+<body translate="no">
+<div class="container">
+<div id="chatscroll" class="chat" >
+    <div id="chat" class="screen">
+    <div class="message__list rose">
+    <img class="bot__image" src="rose_dp.jpg">
+    <div class="message__item message__item--bot">
+    <span class="message message--bot">hi i am rose!</span>
+    </div>
+    <!--<div id="rose_typing" class="message__item message__item--bot container-typing"><span class="message message--bot"><span class="circle cc1" id="circle1"></span><span class="circle cc2" id="circle2"></span><span class="circle cc3" id="circle3"></span></span></div>-->
+    </div>
+    </div>
+</div>
+
+<div id="input-row" class="form-row user-input">
+    <div class="col-md-10 col-sm-10 col-10 mb-3">
+      <input type="text" class="form-control form-rounded" id="reply" placeholder="Type a message"/>
+    </div>
+    <div class="col-md-1 col-sm-1 col-1 mb-3">
+      <svg id="btn-send" height="36px" width="36px" viewBox="0 0 36 36"><g fill="none" fill-rule="evenodd"><g><polygon points="0 36 36 36 36 0 0 0"></polygon><path d="M31.1059281,19.4468693 L10.3449666,29.8224462 C8.94594087,30.5217547 7.49043432,29.0215929 8.17420251,27.6529892 C8.17420251,27.6529892 10.7473302,22.456697 11.4550902,21.0955966 C12.1628503,19.7344961 12.9730756,19.4988922 20.4970248,18.5264632 C20.7754304,18.4904474 21.0033531,18.2803547 21.0033531,17.9997309 C21.0033531,17.7196073 20.7754304,17.5095146 20.4970248,17.4734988 C12.9730756,16.5010698 12.1628503,16.2654659 11.4550902,14.9043654 C10.7473302,13.5437652 8.17420251,8.34697281 8.17420251,8.34697281 C7.49043432,6.9788693 8.94594087,5.47820732 10.3449666,6.1775158 L31.1059281,16.553593 C32.298024,17.1488555 32.298024,18.8511065 31.1059281,19.4468693" fill="#0099ff"></path></g></g></svg>
+    </div>
+</div>
+<div id="blocked" style="display: none;">
+You cannot reply to this conversation
+</div>
+
+</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="jquery.nicescroll.min.js">
+    </script>
+<script>
+var rose_typing = '<div id="rose_typing" class="message__item message__item--bot container-typing"><span class="message message--bot"><span class="circle cc1" id="circle1"></span><span class="circle cc2" id="circle2"></span><span class="circle cc3" id="circle3"></span></span></div>';
+var count = 0;
+var delay = 1000;
+var theme = "";
+var name = "";
+
+$(document).ready(function(){
+    $(".chat").niceScroll();
+})
+    
+function sendUser(message){
+    if ($("#chat").children().last().hasClass("rose")) {
+        $('#chat').append('<div class="message__list user"></div>');
+    }
+    $("#chat").children().last().append('<div class="message__item message__item--user"><span class="message message--user">' + message +'</span></div>');
+}
+
+async function sendRose(message){
+    
+    if ($("#chat").children().last().hasClass("user")) {
+        $('#chat').append('<div class="message__list rose"><img class="bot__image" src="rose_dp.jpg"></div>');
+    }
+    scrollDown();
+    roseTyping();
+    await sleep(2000);
+    roseHideTyping();
+    await sleep(600);
+    $("#chat").children().last().append('<div class="message__item message__item--bot"><span class="message message--bot">' + message +'</span></div>');
+    scrollDown();
+}
+
+function roseTyping() {
+    if ($("#chat").children().last().hasClass("user")) {
+        $('#chat').append('<div class="message__list rose"><img class="bot__image" src="rose_dp.jpg"></div>');
+    }
+    $("#chat").children().last().append(rose_typing);
+    scrollDown();
+}
+
+function roseHideTyping() {
+    $("#rose_typing").remove();
+}
+
+$('#reply').keypress(function(event){
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    if (keycode == '13') {
+        talk();
+        return false;
+    }
+});
+
+$('#btn-send').on( "click", function() {
+  talk();
+});
+
+$( window ).resize(function() {
+  // auto resize screen and input when virtual keyboard pops up
+  $('#chatscroll').height($(window).height() - 50);
+  $('#chatscroll').animate({scrollTop: $('#chatscroll').get(0).scrollHeight}, 800);
+});
+
+
+// document load
+$('#chatscroll').height($(window).height() - 50);
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function delayedSend(messages, delay=4000) {
+    // messages: a list of strings containing the messages to send in order
+    // it will send the messages with a delay
+    for (i in messages) {
+        sendRose(messages[i]);
+        await sleep(delay); // make sure this is greater than the total delay in sendRose bc async
+    }
+}
+
+function search_or(repl, keywords) {
+    // given a sentence repl and a list of words/array keywords
+    // this will return true of the keyword is detected in repl
+    for (word in keywords) {
+        if (typeof keywords[word] == 'string') {
+            if (repl.toLowerCase().includes(keywords[word]))
+                return true;
+        } else {
+            if (search_and(repl, keywords[word]))
+                return true;
+        }          
+    }
+    return false;
+}
+
+function search_and(repl, keywords) {
+    // given a sentence repl and a list of words keywords
+    for (word in keywords) {
+        if (typeof keywords[word] == 'string') {
+            if (!(repl.toLowerCase().includes(keywords[word])))
+                return false;
+        } else {
+            if (!(search_or(repl, keywords[word])))
+                return false;
+        }  
+    }
+    return true;
+}
+
+//function test1() {
+//    console.log("--- TRUE ----");
+//    console.log(search_and("i hate you", ["hate", ["u", "you"]]));
+//    console.log(search_and("i hate u", ["hate", ["u", "you"]]));
+//    console.log(search_and("i hate u", [["hate", "love"], ["u", "you"]]));
+//    console.log(search_and("i love u", [["hate", "love"], ["u", "you"]]));
+//    console.log(search_and("i love you", [["hate", "love"], ["u", "you"]]));
+//    console.log(search_or("stay", ["stay", ["see", "later"]]));
+//    console.log(search_or("see you later", ["stay", ["see", ["u", "you"], "later"]]));
+//    console.log(search_or("see u later", ["stay", ["see", ["u", "you"], "lat"]]));
+//    console.log("--- FALSE ---");
+//    console.log(search_and("i love u", ["hate", ["u", "you"]]));
+//    console.log(search_and("i luv u", ["hate", ["u", "you"]]));
+//    console.log(search_or("see", ["stay", ["see", "later"]]));
+//    console.log(search_or("see later", ["stay", ["see", ["u", "you"], "later"]]));
+//}
+
+async function block() {
+    await sleep(25000);
+    $('#input-row').hide();
+    $('#blocked').show();
+    $('#blocked').css({
+        "display": "block",
+        "border": "1px solid #c5c5c5",
+        "padding": "10px"
+    });
+}
+
+function scrollDown() {
+    $('#chatscroll').animate({scrollTop: $('#chatscroll').get(0).scrollHeight}, 1);
+}
+
+var affirm_array = ["yes", "yea", "sure", "ya", "ok", "ofc", "of course", "of "];
+var no_array = ["no", "na", "nty"];
+var question_array = ["why", "how", "who", "what", "?", "where", "which", "when"];
+var hate_array = [[["don't", "dont", "do not"], "like"], "hate", "ew", "gross", "dislike", "shit", "h8"];
+var relo_array = [
+    [['will', 'can', 'be'], ['bf', 'boyf', 'gf', 'girlf', 'gurlf', 'wife', 'partner', 'spouse', 'date']],
+    [["date", "marry"], ["me", "will"]],
+    [['want', 'love'], ['u', 'you']]
+]; //or
+
+var songs_arr = ["stay", "ddu", "as if", "kill this", "kick it", "whistle", 'boom',
+                "really", "hope not", ['playing', 'fire'], "forever young", 
+                ["see", ["u", "you", " y"], "lat"]];
+var songs_arr2 = ["stay", "kill this", "kick it", "whistle",
+                 "really", "hope not", "forever young"];
+var twice_songs = ["likey", "fancy", "cheer up", "yes or", "what is love", ["dance", "night"],
+                   "more and more", "dance the night", "tt", ["heart", "shake"]];
+function get_song(repl) {
+    for (temp_name in songs_arr2) {
+        if (repl.toLowerCase().includes(songs_arr2[temp_name]))
+            return songs_arr2[temp_name];
+    }
+    if (search_or(repl, ['boom'])) {
+        return "Boombayahhhhhh";
+    } else if (search_or(repl, ['as if'])) {
+        return "Majimakcheoreom ma-ma-majimakcheoreom!";
+    } else if (search_or(repl, ['ddu'])) {
+        return "Hit you with the Ddu Ddu DDu !!!";
+    } else if (search_and(repl, ['playing', 'fire'])) {
+        return "Playing with Fireee";
+    } else if (search_and(repl, ["see", ["u", "you", " y"], "lat"])) {
+        return "See ya later boy, see ya later!";
+    } else if (search_and(repl, [["dont", "don't"], "know"])) {
+        return "I don't know what to do without youuuuuuuuuu";
+    } else {
+        return false;
+    }
+}
+
+
+//test1();
+
+function talk() {
+    var repl = document.getElementById("reply").value;
+    repl = repl.trim()
+    if (repl == '') return; // disable blank messages
+    sendUser(repl);
+    repl = repl.toLowerCase();
+    $("#reply").val("");
+    scrollDown();
+    
+    think_reply(repl);
+}
+   
+async function think_reply(repl) {
+    console.log("thinking on input: " + repl);
+    setTimeout(function() {
+        if (count == 0) {
+            if (search_or(repl, relo_array)) {
+                delayedSend([
+                    "i'm not looking for a relationship atm",
+                    "let's just be friends",
+                    "what's your name?"
+                ]);
+            } else {
+                sendRose("What's ur name?");
+            }
+            count += 1;
+        } else if (count == 1) {
+            repl = repl.replace("'", "");
+            // console.log(repl);
+            var omit = ["hi ", "hey ", "my ", "name ", " name", "is ", "its ", 'i ', 'am ', 'im'];
+            for (i in omit) {
+                repl = repl.replace(omit[i], "");
+            }
+            repl = repl.replace("  ", " ");
+            
+            var names_list = ["jonno", "jono", "jonathan", "johnny", "john",
+                "vincent", "therese", "karen", "maggie", "shannon", "david",
+                "kim", "lisa", "jisoo", "jennie", "jenny", "rose",
+                "amanda", "thy", "duy", "amy", "kevin", "celeste", "hannah",
+                "ellen", "sophie", "lily", "charlene", "sharon",
+                "victor", "alex", "jack", "jessica", "jessi", "jess", "vinnie", "neha", "soph",
+                "hung", "jamie", "anthony", "dylan", "anton", "andrew", "alina",
+                "eric", "helen", "james", "jasmine", "jason", "patrick",
+                "victor", "rachel", "sally", "chelsea", "euginia", "eug", "sharon", "shaz", "marie",
+                "peter"];
+             
+            if (repl.includes(" ")) {
+                for (temp_name in names_list) {
+                    if (repl.toLowerCase().includes(names_list[temp_name]))
+                        name = names_list[temp_name];
+                }
+                if (name == "") name = "there";
+            } else {
+                name = repl;
+            }
+            
+            if (name == "rose") {
+                delayedSend([
+                    "no, I am rose!",
+                    "lmaoooo",
+                    "jks haha what's up?"
+                ]);
+            } else if (name == "lisa") {
+                delayedSend([
+                    "oh that's cute xD i have a friend named Lisa",
+                    "she's a great dancer hehe",
+                    "what's up? how have you been?"
+                ]);
+            } else if (name == "jisoo") {
+                delayedSend([
+                    "jisoo unnie? wtf you speak english???",
+                    "btw you still haven't replied to my texts yet!!",
+                    "what are u doing now?"
+                ]);
+            } else if (name == "jennie") {
+                delayedSend([
+                    "LOL jennie! what are you doing here?",
+                    "come to my room and pat me! what are you doing now?"
+                ]);
+            } else {
+                sendRose("hey " + name + " what's up?");
+            }
+            
+                count += 1;
+            }
+            else if (count == 2) {
+                if (search_or(repl, ["sky", "ceil", "fell", "heaven", "roof"]))
+                {
+                    delayedSend([
+                        "that's not what i meant when i asked 'what's up'........",
+                        "HAHAHAHAHHA"
+                    ]);
+                } else if (search_or(repl, ["hbu", "wbu", "what about", "how are", "how r", "how about", "you?", "u?"])) {
+                    delayedSend([
+                        "just practicing some more singing",
+                        "and dancing :)",
+                        "and annoying jisoo"
+                    ]);
+                } else if (search_or(repl, relo_array)) {
+                    delayedSend([
+                        "maybe not at the moment",
+                        "let's just be friends",
+                    ]);
+                } else if (search_or(repl, ["good", "great", "nothin", "nm", "not much"])) {
+                    sendRose("that's great to hear :) :)");
+                } else if (search_or(repl, ["sad", "depressed", "dev", "rip", "miserable"])) {
+                    theme = "user_sad";
+                    delayedSend([
+                        "awwww :( i hope you feel better soon " + name + " :)",
+                        "you can rant to me if you want :)",
+                        "just go. i will listen to you ^_^"
+                    ]);
+                } else {
+                    delayedSend([
+                        "wow!",
+                        "i've been learning some new dance moves",
+                    "i can't wait to show you at our next concert! :)"
+                ]);
+                }
+                count += 1;
+            } else if (count == 3) {
+                if (search_and(repl, [
+                    ['when', 'which'], ['concert', 'that']
+                ])) {
+                    delayedSend([
+                        "umm...",
+                        "tbh i'm not sure",
+                        "maybe in september??",
+                        "i miss you blinks so much!! i can't wait to see you again"
+                    ]);
+                } else if (search_or(repl, relo_array)) {
+                    delayedSend([
+                        "omgg relax",
+                        "i'm taken...",
+                        "by Lisa haha",
+                    ]);
+                } else if (search_or(repl, question_array)) {
+                    delayedSend([
+                        "umm...",
+                        "tbh i'm not sure",
+                        "i'll have a think about it",
+                        "i miss you blinks so much!!"
+                    ]);
+                } else if (theme == "user_sad") {
+                    delayedSend([
+                        "damn",
+                        "it's okay",
+                        "it's been pretty sad here as well",
+                        "no new music or concerts lately",
+                        "i miss you blinks so much!! i can't wait to see you all again"
+                    ]);
+                } else {
+                    delayedSend([
+                        "i miss you blinks so much!!"
+                    ]);
+                }
+                count += 1;
+            } else if (count == 4) {
+                if (search_and(repl, "miss", ["u", "you"]))
+                {
+                    delayedSend([
+                        "aww you're so sweet",
+                        "i miss you so much too",
+                        "we should catch up some time! i'll sing you a special song just for you :)",
+                        "what's your favourite song?"
+                    ]);
+                } else {
+                    sendRose("what's your favourite song?");
+                }
+                count += 1;
+            } else if (count == 5) {
+                var song = get_song(repl);
+                var prev = 0;
+                if (search_or(repl, hate_array)) {
+                    prev = 19000;
+                    delayedSend([
+                        ":( :(",
+                        "that's not very nice",
+                        "well guess what? i'm fkn rich and successful",
+                        "you're just jealous",
+                        "FUCK YOU BITCH"
+                    ]);
+                    block();
+                } else if (song != false) {
+                    prev = 19000;
+                    delayedSend([
+                        "yes!!!! i love performing this",
+                        song + " hehe such a nice song",
+                        "do you want some blackpink glowsticks for the concert?"
+                    ]);
+                } else if (repl.toLowerCase().includes("all")) {
+                    prev = 19000;
+                    delayedSend([
+                        "all of them?",
+                        "HAHA that's so nice",
+                        "do you want some blackpink glowsticks for the concert?"
+                    ]);
+                } else if (repl.toLowerCase().includes("solo")) {
+                    prev = 19000;
+                    delayedSend([
+                        "oh, i'll let jennie know you like it :)",
+                        "meanwhile... still waiting for YG to give me my own solo",
+                        "do you want some blackpink glowsticks for the concert?"
+                    ]);
+                } else if (search_or(repl, twice_songs)) {
+                    prev = 19000;
+                    delayedSend([
+                        "oh that's a nice song",
+                        "but i meant a song from blackpink!!",
+                        "but i also like Twice a lot as well. they're so cute!",
+                        "do you want some blackpink glowsticks for the concert?"
+                    ]);
+                } else {
+                    prev = 19000;
+                    delayedSend([
+                        "oh that's a nice song",
+                        "but i meant a song from blackpink!!",
+                        "do you want some blackpink glowsticks for the concert?"
+                    ]);
+                }
+                
+                if (search_or(repl, [
+                    "wbu",
+                    [["what", "which", "and", "how"], [" u", "you", "ur", "song"]]
+                ])) {
+                    // set prev as override delay to prevent typing messages at the same time
+                    delayedSend("my fav song is As If It's Your Last", prev);
+                }
+                
+                count += 1;
+            } else if (count == 6) {
+                if (search_or(repl, affirm_array)) {
+                    sendRose("here you go! *hands over a glowstick*");
+                } else if (search_or(repl, no_array)) {
+                    delayedSend([
+                        "I assure you that my glowstick will cheer you up ;)",
+                        "you can even put it in ur .... ",
+                        "let's keep that between just us ;)",
+                        "heheh"
+                    ]);
+                } else if (search_or(repl, question_array)) {
+                    delayedSend([
+                        "you can use it to light up at our concerts",
+                        "its how we can identify our blinks",
+                        "they look like heart hammers",
+                        "they're really cute"
+                    ]);
+                } else {
+                    sendRose("the glowsticks are really cute ^_^");
+                }
+                count += 1;
+            } else if (count == 7) {
+                delayedSend([
+                    "i'll shove my glowstick into you ;)",
+                    "hehehe",
+                    "who's your fav blackpink member?",
+                ]);
+                count += 1;
+            } else if (count == 8) {
+                if (search_or(repl, ['rose', 'u', 'you'])) {
+                    delayedSend([
+                        "awww you're so sweet",
+                        "i love me too hahaha",
+                        "do you want to see my fishies?",
+                    ]);
+                } else if (name == "lisa") { // fix this, name is the person's name, not members
+                    delayedSend([
+                        "cutee i'll let Lisa know :)",
+                        "i love her lots too xx",
+                        "do you want to see my fishies?"
+                    ]);
+                } else if (name == "jisoo") {
+                    delayedSend([
+                        "cutee i'll let Jisoo know :)",
+                        "i love her lots too xx",
+                        "do you want to see my fishies?"
+                    ]);
+                } else if (name == "jennie") {
+                    delayedSend([
+                        "cutee i'll let Jennie know :)",
+                        "i love her lots too xx",
+                        "do you want to see my fishies?"
+                    ]);
+                } else if (search_or(repl, question_array)) {
+                    delayedSend([
+                        "who do you think?",
+                        "do you want to see my fishies?"
+                    ]);
+                } else {
+                    delayedSend([
+                        "who dat?",
+                        "do you want to see my fishies?"
+                    ]);
+                }
+                count += 1;
+            } else if (count == 9) {
+                if (search_or(repl, affirm_array)) {
+                    delayedSend([
+                        "coolies! let me take a pic",
+                        "brb"
+                    ]);
+                } else if (search_or(repl, no_array)) {
+                    delayedSend([
+                        "CMON they're soo cute",
+                        "...",
+                        "seeeee?",
+                    ]);
+                }
+                
+                
+                // send photo
+                count = 15;
+            //} else if (count == 10) {
+            } else if (count == 14) {
+                sendRose("ummm... let's change the topic xD hahaha");
+                count += 1;
+            } else if (count == 15) {
+                sendRose("errr actually... do you want to talk about maths");
+                count += 1;
+            } else if (count == 16) {
+                if (repl.toLowerCase().includes("yes") || repl.toLowerCase().includes("yea") || repl.toLowerCase().includes("sure") || repl.toLowerCase().includes("ya") || repl.toLowerCase().includes("ok")) {
+                    sendRose("actually i'm not that good at maths. why don't you talk to jonno instead?");
+                    count += 1;
+                } else if (repl.toLowerCase().includes("no") || repl.toLowerCase().includes("na") || repl.toLowerCase().includes("nty")) {
+                    sendRose("ahaha good... cos i'm not that good xD");
+                    count += 1;
+                } else {
+                    sendRose("riperino");
+                    count += 1;
+                }
+            } else if (count == 17) {
+                sendRose("anyway... how was your day");
+                count += 1;
+            } else if (count == 18) {
+                if (repl.toLowerCase().includes("good") || repl.toLowerCase().includes("great") || repl.toLowerCase().includes("nothin") || repl.toLowerCase().includes("nm")) {
+                    sendRose("that's great to hear :) :)");
+                } else if (repl.toLowerCase().includes("wbu") || repl.toLowerCase().includes("what about") || repl.toLowerCase().includes("you?") || repl.toLowerCase().includes("how about")) {
+                    sendRose("i don't really do much. just talking to my fans xx");
+                } else if (repl.toLowerCase().includes("sad") || repl.toLowerCase().includes("depressed") || repl.toLowerCase().includes("dev") || repl.toLowerCase().includes("rip") || repl.toLowerCase().includes("miserable")) {
+                    sendRose("awwww :( i hope you feel better soon. you can rant to me if you want. just go. i will listen to you :)");
+                } else {
+                    sendRose("*pat pat*");
+                }
+                count += 1;
+            } else if (count == 19) {
+                sendRose("anyway... do you want to hear a joke?");
+                count += 1;
+            } else if (count == 20) {
+                if (search_or(repl, affirm_array)) {
+                    sendRose("awesome! okay i hope its funny ;)  knock knock");
+                    count += 1;
+                } else if (repl.toLowerCase().includes("no") || repl.toLowerCase().includes("na") || repl.toLowerCase().includes("nty")) {
+                    sendRose(" ... well too bad, I'm going to say it anyway xD... knock knock");
+                    count += 1;
+                } else {
+                    sendRose("knock knock");
+                    count += 1;
+                }
+            } else if (count == 21) {
+                if (search_and(repl, ["who", "there"])) {
+                    sendRose("Arch");
+                    count += 1;
+                } else {
+                    delayedSend([
+                        "i don't think u quite get the idea of knock knock jokes",
+                        "ur meant to reply with `Who's there?'",
+                        "Let's try again!"
+                    ]);
+                }
+            } else if (count == 22) {
+                if (search_and(repl, ["arch", "who"])) {
+                    sendRose("Bless you!! LOL hahahhaha!!!!!");
+                    count += 1;
+                } else {
+                    sendRose("You're meant to reply with `Arch who?'. Let's try again!");
+                }
+            } else if (count == 23) {
+                if (search_or(repl, ["lame", "dry", "boring", "not"])) {
+                    delayedSend([
+                        "awww :(",
+                        "at least jisoo thinks i'm funny :)",
+                        "you suck! :("
+                    ]);
+                } else if (search_or(repl, ["funny", " ha", ' ha', " ah", 'ah ', "lol", 'lmao'])) {
+                    sendRose("lol :') i'm glad you liked it");
+                } else {
+                    sendRose("i'm so funny HAHAHA");
+                }
+                count += 1;
+            } else if (count == 24) {
+                delayedSend([
+                    "omg i'm so sorry i need to go now!!!",
+                    "i have a rehearsal to go now",
+                    "ttyl ^_^"
+                ]);
+                count += 1;
+            }
+    }, delay);
+}
+
+</script>
+</html>
