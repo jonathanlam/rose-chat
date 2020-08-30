@@ -74,6 +74,13 @@ body {
   border-bottom-left-radius: 20px;
 }
 
+.message_img {
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
 .message__item--user {
   float: right;
   text-align: right;
@@ -294,6 +301,8 @@ body {
     <div class="message__item message__item--bot">
     <span class="message message--bot">hi i am rose!</span>
     </div>
+    
+    
     <!--<div id="rose_typing" class="message__item message__item--bot container-typing"><span class="message message--bot"><span class="circle cc1" id="circle1"></span><span class="circle cc2" id="circle2"></span><span class="circle cc3" id="circle3"></span></span></div>-->
     </div>
     </div>
@@ -345,6 +354,15 @@ async function sendRose(message){
     roseHideTyping();
     await sleep(600);
     $("#chat").children().last().append('<div class="message__item message__item--bot"><span class="message message--bot">' + message +'</span></div>');
+    scrollDown();
+}
+
+async function sendRoseImg(filename) {
+    // Precondition - it is Rose's turn to talk.
+    // Get her to send something before like 
+    // "hang on let me take a pic"
+    await sleep(20000);
+    $("#chat").children().last().append('<div class="message__item message__item--bot"><span class="message_img message--bot"><img class="message_img" src="' + filename +'"/></span></div>');
     scrollDown();
 }
 
@@ -786,8 +804,8 @@ async function think_reply(repl) {
                     ]);
                 }
                 
-                
                 // send photo
+                sendRoseImg("joohwangie.jpg");
                 count = 15;
             //} else if (count == 10) {
             } else if (count == 14) {
