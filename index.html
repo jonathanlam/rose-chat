@@ -484,6 +484,7 @@ var relo_array = [
     [['want', 'love'], ['u', 'you']]
 ]; //or
 
+var sad_array = ["sad", "depressed", "dev", "rip", "miserable"];
 var songs_arr = ["stay", "ddu", "as if", "kill this", "kick it", "whistle", 'boom',
                 "really", "hope not", ['playing', 'fire'], "forever young", 
                 ["see", ["u", "you", " y"], "lat"]];
@@ -555,26 +556,26 @@ async function think_reply(repl) {
                 delayedSend([
                     "oh that's cute xD i have a friend named Lisa",
                     "she's a great dancer hehe",
-                    "what's up? how have you been?"
+                    "wassup yo"
                 ]);
             } else if (name == "jisoo") {
                 delayedSend([
                     "jisoo unnie? wtf you speak english???",
                     "btw you still haven't replied to my texts yet!!",
-                    "what are u doing now?"
+                    "keke what's up?"
                 ]);
             } else if (name == "jennie") {
                 delayedSend([
                     "LOL jennie! what are you doing here?",
-                    "come to my room and pat me! what are you doing now?"
+                    "come to my room and pat me! kekeke"
+                    "wassup"
                 ]);
             } else {
                 sendRose("hey " + name + " what's up?");
             }
             
-                count += 1;
-            }
-            else if (count == 2) {
+            count += 1;
+        } else if (count == 2) {
                 if (search_or(repl, ["sky", "ceil", "fell", "heaven", "roof"]))
                 {
                     delayedSend([
@@ -594,7 +595,7 @@ async function think_reply(repl) {
                     ]);
                 } else if (search_or(repl, ["good", "great", "nothin", "nm", "not much"])) {
                     sendRose("that's great to hear :) :)");
-                } else if (search_or(repl, ["sad", "depressed", "dev", "rip", "miserable"])) {
+                } else if (search_or(repl, sad_array)) {
                     theme = "user_sad";
                     delayedSend([
                         "awwww :( i hope you feel better soon " + name + " :)",
@@ -647,7 +648,7 @@ async function think_reply(repl) {
                 }
                 count += 1;
             } else if (count == 4) {
-                if (search_and(repl, "miss", ["u", "you"]))
+                if (search_and(repl, ["miss", [" u", "you"]]))
                 {
                     delayedSend([
                         "aww you're so sweet",
@@ -829,11 +830,11 @@ async function think_reply(repl) {
                 sendRose("anyway... how was your day");
                 count += 1;
             } else if (count == 18) {
-                if (repl.toLowerCase().includes("good") || repl.toLowerCase().includes("great") || repl.toLowerCase().includes("nothin") || repl.toLowerCase().includes("nm")) {
+                if (search_or(repl, ['good', 'great', 'nothin', 'nm'])) {
                     sendRose("that's great to hear :) :)");
-                } else if (repl.toLowerCase().includes("wbu") || repl.toLowerCase().includes("what about") || repl.toLowerCase().includes("you?") || repl.toLowerCase().includes("how about")) {
+                } else if (search_or(repl, ['wbu', 'what about', 'you?', 'u?', 'how about'])) {
                     sendRose("i don't really do much. just talking to my fans xx");
-                } else if (repl.toLowerCase().includes("sad") || repl.toLowerCase().includes("depressed") || repl.toLowerCase().includes("dev") || repl.toLowerCase().includes("rip") || repl.toLowerCase().includes("miserable")) {
+                } else if (search_or(repl, sad_array)) {
                     sendRose("awwww :( i hope you feel better soon. you can rant to me if you want. just go. i will listen to you :)");
                 } else {
                     sendRose("*pat pat*");
