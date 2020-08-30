@@ -14,5 +14,8 @@ I wrote this because I was lonely and don't have a girlfriend so this was the ne
 - Better emotion recognition
 - Combine scripted conversations with machine learning
 - Better natural language processing
+- Multimedia messages
+- Improve UI to feel more realistic
+- Mobile support
 
-Try it out at [https://jonathanlamao.com/askrose] and if you like this or want to help, you can email me a screenshot of your convo (this will me identify different people's responses to her scripted responses).
+Try it out at https://jonathanlamao.com/askrose and if you like this or want to help, you can email me a screenshot of your convo (this will me identify different people's responses to her scripted responses).
