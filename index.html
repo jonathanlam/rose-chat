@@ -730,25 +730,31 @@ async function think_reply(repl) {
                 ]);
                 count += 1;
             } else if (count == 8) {
-                if (search_or(repl, ['rose', 'u', 'you'])) {
+                if (search_and(repl, [['not', 'hate'], ['u', 'you']])) {
+                    delayedSend([
+                        "wtf i am awesome!",
+                        "f*** you!!!"
+                    ]);
+                    block();
+                } else if (search_or(repl, ['rose', 'u', 'you'])) {
                     delayedSend([
                         "awww you're so sweet",
                         "i love me too hahaha",
                         "do you want to see my fishies?",
                     ]);
-                } else if (name == "lisa") { // fix this, name is the person's name, not members
+                } else if (search_or(repl, ["lisa"])) {
                     delayedSend([
                         "cutee i'll let Lisa know :)",
                         "i love her lots too xx",
                         "do you want to see my fishies?"
                     ]);
-                } else if (name == "jisoo") {
+                } else if (search_or(repl, ["jisoo"])) {
                     delayedSend([
                         "cutee i'll let Jisoo know :)",
                         "i love her lots too xx",
                         "do you want to see my fishies?"
                     ]);
-                } else if (name == "jennie") {
+                } else if (search_or(repl, ["jennie"])) {
                     delayedSend([
                         "cutee i'll let Jennie know :)",
                         "i love her lots too xx",
