@@ -1,19 +1,21 @@
 // Takes a string as input and returns a possible name
 
 function getName(repl) {
-    // Convert all input to lower case, remove non-alpha chars
+    // Convert all input to lower case, remove non-alpha chars (except hypens)
     // Split into a list of words
     var name = "";
-    repl = repl.toLowerCase().replace(/[^a-zA-Z ]/g, "").split(" ");
+    repl = repl.toLowerCase().replace(/[^a-zA-Z \-]/g, "").split(" ");
     
-    var omit = ["hi", "hey", "my", "name", "is", "its", 'i', 'am', 'im', 'how'];
+    var omit = ["hi", "hey", "my", "name", "is", "its", 
+                'i', 'am', 'im', 'how', 
+                'nice', 'to', 'meet', 'u'];
     
     // possible_names is repl with common english words (omit) deleted
-    var possible_names = [];
-    for (i in repl) {
-        if (!(omit.includes(repl[i])))
-            possible_names.push(repl[i]);
-    }
+    
+    var possible_names = repl.filter(function(v) {
+        return (!omit.includes(v));
+    });
+    
     
     // list of names in order of importance
     var names_list = ["jonno", "jono", "jonathan", "johnny", "john",
