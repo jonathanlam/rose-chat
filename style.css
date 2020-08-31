@@ -1,0 +1,273 @@
+html {
+  overflow: hidden;
+}
+
+body {
+    overflow: hidden ! important;
+    height: 100%;
+}
+
+.container {
+  height: 100%;
+  margin: 0 auto;
+  padding-bottom: 45px;
+}
+
+.form-rounded {
+  border-radius: 20rem;
+  padding: 8px 15px;
+  margin-top: 2px;
+  width: 100%;
+  background-color: #eee;
+  border: 0 none;
+}
+
+.form-rounded:focus {
+    outline: none;
+    background-color: #eee;
+}
+
+.screen {
+  padding-top: 10px;
+}
+
+.user-input {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.message__list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  width: 100%;
+  position: relative;
+}
+.message__list:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.message__item {
+  max-width:70%;
+  clear: both;
+}
+
+.message__item--bot {
+  float: left;
+}
+.message__item--bot:first-of-type .message {
+  border-top-left-radius: 20px;
+}
+.message__item--bot:last-of-type .message {
+  border-bottom-left-radius: 20px;
+}
+
+.message_img {
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.message__item--user {
+  float: right;
+  text-align: right;
+}
+.message__item--user:first-of-type .message {
+  border-top-right-radius: 20px;
+}
+.message__item--user:last-of-type .message {
+  border-bottom-right-radius: 20px;
+}
+
+.message {
+  padding: 8px 15px;
+  margin-top: 2px;
+  display: inline-block;
+  text-align: left;
+}
+
+.message--bot {
+  background-color: #eee;
+  border-radius: 3px 20px 20px 3px;
+  margin-left: 35px;
+}
+
+.message--user {
+  background-color: #0baaff;
+  color: #fff;
+  border-radius: 20px 3px 3px 20px;
+}
+
+.bot__image {
+  width: 28px;
+  height: 28px;
+  position: absolute;
+  bottom: 3px;
+  left: 0;
+  border-radius: 20px;
+}
+
+.answer {
+  position: fixed;
+  bottom: 0;
+  background-color: #fff;
+  width: 100%;
+  padding: 10px;
+}
+
+.answer__button {
+  background-color: #0baaff;
+  border-radius: 20px;
+  color: #fff;
+  padding: 8px 15px;
+  margin-top: 2px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+
+
+.list-phone .meta-bar,
+.list-text .meta-bar,
+.list-account .meta-bar,
+.list-chat .meta-bar {
+  border-bottom: 1px solid #7daefe;
+  padding: 0 0 0 25px;
+  height: 40px;
+  position: relative;
+  width: 100%;
+  background-color: white;
+}
+.list-phone .meta-bar.chat,
+.list-text .meta-bar.chat,
+.list-account .meta-bar.chat,
+.list-chat .meta-bar.chat {
+  border-top: 1px solid lightgrey;
+  background: white;
+  border-bottom: none;
+  position: absolute;
+  bottom: 0px; /*was 50 when had the bottom menu*/
+}
+
+.container-typing {
+    width: 200px;
+    position: relative;
+    margin: 0 auto
+}
+
+.circle {
+    height: 8px;
+    width: 8px;
+    margin: 0 3px;
+    background-color: #B6B5BA;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    top: 0px;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear
+
+}
+
+#circle1 {
+  -webkit-animation-name: circle1;
+}
+
+#circle2 {
+  -webkit-animation-name: circle2;
+}
+
+#circle3 {
+  -webkit-animation-name: circle3;
+}
+
+#circle1 {
+  animation-name: circle1;
+}
+
+#circle2 {
+  animation-name: circle2;
+}
+
+#circle3 {
+  animation-name: circle3;
+}
+
+@-webkit-keyframes circle1 {
+  0% {
+    top: 0px;
+  }
+  15% {
+    top: -10px;
+  }
+  25% {
+    top: 0px;
+  }
+}
+
+@-webkit-keyframes circle2 {
+  10% {
+    top: 0px;
+  }
+  25% {
+    top: -10px;
+  }
+  35% {
+    top: 0px;
+  }
+}
+
+@-webkit-keyframes circle3 {
+  15% {
+    top: 0px;
+  }
+  30% {
+    top: -10px;
+  }
+  40% {
+    top: 0px;
+  }
+}
+
+@keyframes circle1 {
+  0% {
+    top: 0px;
+  }
+  20% {
+    top: -10px;
+  }
+  30% {
+    top: 0px;
+  }
+}
+
+@keyframes circle2 {
+  10% {
+    top: 0px;
+  }
+  25% {
+    top: -10px;
+  }
+  35% {
+    top: 0px;
+  }
+}
+
+@keyframes circle3 {
+  15% {
+    top: 0px;
+  }
+  30% {
+    top: -10px;
+  }
+  40% {
+    top: 0px;
+  }
+}
