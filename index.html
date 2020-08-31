@@ -24,7 +24,7 @@
     <div class="message__list rose">
     <img class="bot__image" src="rose_dp.jpg">
     <div class="message__item message__item--bot">
-    <span class="message message--bot">hi i am rose!</span>
+    <span class="message message--bot">hi i am rosé!</span>
     </div>
     
     
@@ -413,14 +413,14 @@ async function think_reply(repl) {
                     song + " hehe such a nice song",
                     "do you want some blackpink glowsticks for the concert?"
                 ]);
-            } else if (repl.toLowerCase().includes("all")) {
+            } else if (repl.includes("all")) {
                 prev = 19000;
                 delayedSend([
                     "all of them?",
                     "HAHA that's so nice",
                     "do you want some blackpink glowsticks for the concert?"
                 ]);
-            } else if (repl.toLowerCase().includes("solo")) {
+            } else if (repl.includes("solo")) {
                 prev = 19000;
                 delayedSend([
                     "oh, i'll let jennie know you like it :)",
