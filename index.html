@@ -800,8 +800,12 @@ async function think_reply(repl) {
             } else if (search_or(repl, no_array)) {
                 delayedSend([
                     "CMON they're soo cute",
-                    "...",
                     "seeeee?",
+                ]);
+            } else {
+                delayedSend([
+                    "look at joohwangie",
+                    "so prettyyyyy",
                 ]);
             }
             
@@ -813,17 +817,17 @@ async function think_reply(repl) {
             sendRose("ummm... let's change the topic xD hahaha");
             count += 1;
         } else if (count == 15) {
-            sendRose("errr actually... do you want to talk about maths");
+            sendRose(name + " can you help me with this maths question?", 1);
             count += 1;
         } else if (count == 16) {
-            if (repl.toLowerCase().includes("yes") || repl.toLowerCase().includes("yea") || repl.toLowerCase().includes("sure") || repl.toLowerCase().includes("ya") || repl.toLowerCase().includes("ok")) {
-                sendRose("actually i'm not that good at maths. why don't you talk to jonno instead?");
+            if (search_or(repl, affirm_array)) {
+                sendRose("omgg thanks so much, i've been kinda stuck on this");
                 count += 1;
-            } else if (repl.toLowerCase().includes("no") || repl.toLowerCase().includes("na") || repl.toLowerCase().includes("nty")) {
-                sendRose("ahaha good... cos i'm not that good xD");
+            } else if (search_or(repl, no_array)) {
+                sendRose(":( damn it i wonder who can help me");
                 count += 1;
             } else {
-                sendRose("riperino");
+                sendRose("hmm... i wonder who can help me");
                 count += 1;
             }
         } else if (count == 17) {
@@ -847,7 +851,7 @@ async function think_reply(repl) {
             if (search_or(repl, affirm_array)) {
                 sendRose("awesome! okay i hope its funny ;)  knock knock");
                 count += 1;
-            } else if (repl.toLowerCase().includes("no") || repl.toLowerCase().includes("na") || repl.toLowerCase().includes("nty")) {
+            } else if (search_or(repl, no_array)) {
                 sendRose(" ... well too bad, I'm going to say it anyway xD... knock knock");
                 count += 1;
             } else {
