@@ -331,6 +331,7 @@ var count = 0;
 var delay = 1000;
 var theme = "";
 var name = "";
+var userTurn = 1; // 1 if user's turn
 
 $(document).ready(function(){
     $(".chat").niceScroll();
@@ -343,7 +344,7 @@ function sendUser(message){
     $("#chat").children().last().append('<div class="message__item message__item--user"><span class="message message--user">' + message +'</span></div>');
 }
 
-async function sendRose(message){
+async function sendRose(message, single = 0){
     
     if ($("#chat").children().last().hasClass("user")) {
         $('#chat').append('<div class="message__list rose"><img class="bot__image" src="rose_dp.jpg"></div>');
@@ -355,6 +356,7 @@ async function sendRose(message){
     await sleep(600);
     $("#chat").children().last().append('<div class="message__item message__item--bot"><span class="message message--bot">' + message +'</span></div>');
     scrollDown();
+    if (single) userTurn = 1;
 }
 
 async function sendRoseImg(filename) {
@@ -411,6 +413,8 @@ async function delayedSend(messages, delay=4000) {
         sendRose(messages[i]);
         await sleep(delay); // make sure this is greater than the total delay in sendRose bc async
     }
+    
+    userTurn = 1;
 }
 
 function search_or(repl, keywords) {
@@ -460,6 +464,8 @@ function search_and(repl, keywords) {
 //}
 
 async function block() {
+    // Blocks the user from messaging Rose
+    // e.g. if the user says anything mean to her
     await sleep(25000);
     $('#input-row').hide();
     $('#blocked').show();
@@ -492,6 +498,7 @@ var songs_arr2 = ["stay", "kill this", "kick it", "whistle",
                  "really", "hope not", "forever young"];
 var twice_songs = ["likey", "fancy", "cheer up", "yes or", "what is love", ["dance", "night"],
                    "more and more", "dance the night", "tt", ["heart", "shake"]];
+
 function get_song(repl) {
     for (temp_name in songs_arr2) {
         if (repl.toLowerCase().includes(songs_arr2[temp_name]))
@@ -520,9 +527,9 @@ function get_song(repl) {
 function talk() {
     var repl = document.getElementById("reply").value;
     repl = repl.trim()
-    if (repl == '') return; // disable blank messages
+    if (repl == '' || userTurn == 0) return; // disable blank messages
     sendUser(repl);
-    repl = repl.toLowerCase();
+    userTurn = 0;
     $("#reply").val("");
     scrollDown();
     
@@ -530,6 +537,7 @@ function talk() {
 }
    
 async function think_reply(repl) {
+    repl = repl.toLowerCase();
     console.log("thinking on input: " + repl);
     setTimeout(function() {
         if (count == 0) {
@@ -540,7 +548,7 @@ async function think_reply(repl) {
                     "what's your name?"
                 ]);
             } else {
-                sendRose("What's ur name?");
+                sendRose("What's ur name?", 1);
             }
             count += 1;
         } else if (count == 1) {
@@ -571,7 +579,7 @@ async function think_reply(repl) {
                     "wassup"
                 ]);
             } else {
-                sendRose("hey " + name + " what's up?");
+                sendRose("hey " + name + " what's up?", 1);
             }
             
             count += 1;
@@ -594,7 +602,7 @@ async function think_reply(repl) {
                     "let's just be friends",
                 ]);
             } else if (search_or(repl, ["good", "great", "nothin", "nm", "not much"])) {
-                sendRose("that's great to hear :) :)");
+                sendRose("that's great to hear :) :)", 1);
             } else if (search_or(repl, sad_array)) {
                 theme = "user_sad";
                 delayedSend([
@@ -657,7 +665,7 @@ async function think_reply(repl) {
                     "what's your favourite song?"
                 ]);
             } else {
-                sendRose("what's your favourite song?");
+                sendRose("what's your favourite song?", 1);
             }
             count += 1;
         } else if (count == 5) {
@@ -722,7 +730,7 @@ async function think_reply(repl) {
             count += 1;
         } else if (count == 6) {
             if (search_or(repl, affirm_array)) {
-                sendRose("here you go! *hands over a glowstick*");
+                sendRose("here you go! *hands over a glowstick*", 1);
             } else if (search_or(repl, no_array)) {
                 delayedSend([
                     "I assure you that my glowstick will cheer you up ;)",
@@ -738,7 +746,7 @@ async function think_reply(repl) {
                     "they're really cute"
                 ]);
             } else {
-                sendRose("the glowsticks are really cute ^_^");
+                sendRose("the glowsticks are really cute ^_^", 1);
             }
             count += 1;
         } else if (count == 7) {
@@ -814,53 +822,59 @@ async function think_reply(repl) {
             count = 15;
         //} else if (count == 10) {
         } else if (count == 14) {
-            sendRose("ummm... let's change the topic xD hahaha");
+            sendRose("ummm... let's change the topic xD hahaha", 1);
             count += 1;
         } else if (count == 15) {
             sendRose(name + " can you help me with this maths question?", 1);
             count += 1;
         } else if (count == 16) {
             if (search_or(repl, affirm_array)) {
-                sendRose("omgg thanks so much, i've been kinda stuck on this");
+                sendRose("omgg thanks so much, i've been kinda stuck on this", 1);
                 count += 1;
             } else if (search_or(repl, no_array)) {
-                sendRose(":( damn it i wonder who can help me");
+                sendRose(":( damn it i wonder who can help me", 1);
                 count += 1;
             } else {
-                sendRose("hmm... i wonder who can help me");
+                sendRose("hmm... i wonder who can help me", 1);
                 count += 1;
             }
         } else if (count == 17) {
-            sendRose("anyway... how was your day");
+            sendRose("anyway... how was your day", 1);
             count += 1;
         } else if (count == 18) {
             if (search_or(repl, ['good', 'great', 'nothin', 'nm'])) {
-                sendRose("that's great to hear :) :)");
+                sendRose("that's great to hear :) :)", 1);
             } else if (search_or(repl, ['wbu', 'what about', 'you?', 'u?', 'how about'])) {
-                sendRose("i don't really do much. just talking to my fans xx");
+                sendRose("i don't really do much. just talking to my fans xx", 1);
             } else if (search_or(repl, sad_array)) {
-                sendRose("awwww :( i hope you feel better soon. you can rant to me if you want. just go. i will listen to you :)");
+                sendRose("awwww :( i hope you feel better soon. you can rant to me if you want. just go. i will listen to you :)", 1);
             } else {
-                sendRose("*pat pat*");
+                sendRose("*pat pat*", 1);
             }
             count += 1;
         } else if (count == 19) {
-            sendRose("anyway... do you want to hear a joke?");
+            sendRose("anyway... do you want to hear a joke?", 1);
             count += 1;
         } else if (count == 20) {
             if (search_or(repl, affirm_array)) {
-                sendRose("awesome! okay i hope its funny ;)  knock knock");
+                delayedSend([
+                    "awesome! okay i hope its funny ;)",
+                    "knock knock",
+                ]);
                 count += 1;
             } else if (search_or(repl, no_array)) {
-                sendRose(" ... well too bad, I'm going to say it anyway xD... knock knock");
+                delayedSend([
+                    "... well too bad, I'm going to say it anyway xD",
+                    "knock knock",
+                ]);
                 count += 1;
             } else {
-                sendRose("knock knock");
+                sendRose("knock knock", 1);
                 count += 1;
             }
         } else if (count == 21) {
             if (search_and(repl, ["who", "there"])) {
-                sendRose("Arch");
+                sendRose("Arch", 1);
                 count += 1;
             } else {
                 delayedSend([
@@ -871,10 +885,16 @@ async function think_reply(repl) {
             }
         } else if (count == 22) {
             if (search_and(repl, ["arch", "who"])) {
-                sendRose("Bless you!! LOL hahahhaha!!!!!");
+                delayedSend([
+                    "Bless you!!",
+                    "LOL hahahhaha!!!!!",
+                ]);
                 count += 1;
             } else {
-                sendRose("You're meant to reply with `Arch who?'. Let's try again!");
+                delayedSend([
+                    "You're meant to reply with `Arch who?'...",
+                    "Let's try again!",
+                ]);
             }
         } else if (count == 23) {
             if (search_or(repl, ["lame", "dry", "boring", "not"])) {
@@ -884,9 +904,9 @@ async function think_reply(repl) {
                     "you suck! :("
                 ]);
             } else if (search_or(repl, ["funny", " ha", ' ha', " ah", 'ah ', "lol", 'lmao'])) {
-                sendRose("lol :') i'm glad you liked it");
+                sendRose("lol :') i'm glad you liked it", 1);
             } else {
-                sendRose("i'm so funny HAHAHA");
+                sendRose("i'm so funny HAHAHA", 1);
             }
             count += 1;
         } else if (count == 24) {
@@ -898,6 +918,7 @@ async function think_reply(repl) {
             count += 1;
         }
     }, delay);
+    
 }
 
 </script>
