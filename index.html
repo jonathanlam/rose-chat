@@ -52,11 +52,11 @@ You cannot reply to this conversation
 <script src="name.js"></script>
 <script>
 var rose_typing = '<div id="rose_typing" class="message__item message__item--bot container-typing"><span class="message message--bot"><span class="circle cc1" id="circle1"></span><span class="circle cc2" id="circle2"></span><span class="circle cc3" id="circle3"></span></span></div>';
-var count = 9;
+var count = 0;
 var delay = 1000;
 var theme = "";
 var name = "";
-var userTurn = 1; // 1 if user's turn
+var userTurn = 1; // 1 if user's turn, 0 for rose's turn
 
 $(document).ready(function(){
     $(".chat").niceScroll();
@@ -231,7 +231,7 @@ function get_song(repl) {
     }
     if (search_or(repl, ['boom'])) {
         return "Boombayahhhhhh";
-    } else if (search_or(repl, ['as if'])) {
+    } else if (search_or(repl, ['as if', 'aiiyl'])) {
         return "Majimakcheoreom ma-ma-majimakcheoreom!";
     } else if (search_or(repl, ['ddu'])) {
         return "Hit you with the Ddu Ddu DDu !!!";
