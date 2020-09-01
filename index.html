@@ -307,6 +307,8 @@ async function think_reply(repl) {
                 sendRose("hey " + name + " what's up?", 1);
             }
             
+            if (name == "there") name = ""; // Reset name to blank
+            
             count += 1;
         } else if (count == 2) {
             if (search_or(repl, ["sky", "ceil", "fell", "heaven", "roof"]))
@@ -544,15 +546,30 @@ async function think_reply(repl) {
             
             // send photo
             sendRoseImg("joohwangie.jpg");
-            count = 15;
-        //} else if (count == 10) {
-        } else if (count == 14) {
-            sendRose("ummm... let's change the topic xD hahaha", 1);
             count += 1;
-        } else if (count == 15) {
+        } else if (count == 10) {
+            // TODO: response to fish pic: wow so pretty
+            if (search_or(repl, ['wow', 'prett', 'nice'])) {
+                delayedSend([
+                    "hehehe ikr??",
+                    "my precious little baby"
+                ]);
+            } else if (search_or(repl, ['ugly', 'wtf'])) {
+                delayedSend([
+                    "you animal!",
+                    "no you're ugly"
+                ]);
+            } else {
+                delayedSend([
+                    "my precious little baby",
+                ]);
+            }
+            
+            count += 1;
+        } else if (count == 11) {
             sendRose(name + " can you help me with this maths question?", 1);
             count += 1;
-        } else if (count == 16) {
+        } else if (count == 12) {
             if (search_or(repl, affirm_array)) {
                 sendRose("omgg thanks so much, i've been kinda stuck on this", 1);
                 count += 1;
@@ -563,6 +580,8 @@ async function think_reply(repl) {
                 sendRose("hmm... i wonder who can help me", 1);
                 count += 1;
             }
+            sendRoseImg("maths.jpg");
+            count = 17;
         } else if (count == 17) {
             sendRose("anyway... how was your day", 1);
             count += 1;
@@ -578,6 +597,7 @@ async function think_reply(repl) {
             }
             count += 1;
         } else if (count == 19) {
+            // TODO: if emotion sad, i'll cheer u up with a joke
             sendRose("anyway... do you want to hear a joke?", 1);
             count += 1;
         } else if (count == 20) {
